@@ -9,6 +9,10 @@
 * Cadastro de Fornecedor
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/c3d982ab-ba02-4535-bb6c-a656c3a07535">
 
+*Listagem de Fornecedor
+<img width="827" alt="image" src="https://github.com/user-attachments/assets/d4405e0b-f437-4f1b-a01f-df4afe302c0e">
+
+
 * Cadastro de Produtos
 <img width="920" alt="image" src="https://github.com/user-attachments/assets/36f8da16-e5e4-4252-bf86-9713f5a839a2">
 
