@@ -1,6 +1,8 @@
 <?php include('valida_sessao.php'); ?>
 <!-- Inclui o arquivo 'valida_sessao.php' para garantir que o usuário esteja autenticado -->
 
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
