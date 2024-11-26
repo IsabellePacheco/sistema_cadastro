@@ -20,10 +20,10 @@ if($result->num_rows == 0) {
 }
 
 // Adiciona a coluna 'imagem' á tabela 'fornecedor' se ela não exibir
-$sql = "SHOW COLUMNS FROM fornecedor  LIKE 'imagem'";
+$sql = "SHOW COLUMNS FROM fornecedores  LIKE 'imagem'";
 $result = $conn->query($sql);
 if($result->num_rows == 0){
-    $sql = "ALTER TABLE fornecedor ADD COLUMN imagem VARCHAR(225)";
+    $sql = "ALTER TABLE fornecedores ADD COLUMN imagem VARCHAR(225)";
     $conn->query($sql);
 }
 ?>
