@@ -12,7 +12,7 @@ if (isset($_GET['delete_id'])) {
     }
 }
 
-$produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f.nome AS fronecerdor_nome FROM produtos p JOIN fornecedor f ON p.fornecedor_id = f.id");
+$produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f.nome AS fornecedor_nome FROM produtos p JOIN fornecedor f ON p.fornecedor_id = f.id");
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +20,7 @@ $produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
@@ -36,18 +37,28 @@ $produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f
             <th>Imagem</th>
             <th>Ações</th>
         </tr>
-        <?php while ($row)
-
-
-
-
-
-
+        <?php while ($row =$produtos->fetch_assoc()): ?>
+        <tr>
+            <td><?php echo $row ['id']; ?> </td>
+            <td><?php echo $row ['nome']; ?> </td>
+            <td><?php echo $row ['descricao']; ?> </td>
+            <td><?php echo $row ['preco']; ?> </td>
+            <td><?php echo $row ['fornecedor_nome']; ?> </td>
+            <td>
+                <?php if ($row['imagem']):?>
+                    <img src="<?php echo $row['imagem']; ?>" alt="Imagem do produto" style="max-width:100px;">
+                <?php else: ?>
+                    Sem imagem
+                <?php endif; ?>
+            </td>
+            <td>
+                <a href="cadastro_produto.php?edit_id=<?php echo $row['id']; ?>">Editar</a>
+             <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </td>
+        </tr>
+        <?php endwhile; ?>
         </table>
-
-
-
-
+            <a href="index.php" class="back-button">Voltar</a>
     </div>
 </body>
 </html>
