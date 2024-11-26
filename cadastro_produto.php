@@ -240,3 +240,4 @@ $fornecedor = $conn->query("SELECT id, nome FROM fornecedor");
     </div>
 </body>
 </html>
+
