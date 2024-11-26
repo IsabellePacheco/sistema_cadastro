@@ -88,7 +88,7 @@ function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
         // Prepara a query SQL para inserção ou atualização
         if ($id) {
             // Se o ID existe, é uma atualização
-            $sql = "UPDATE fornecedor SET nome='$nome', email='$email', telefone='$telefone'";
+            $sql = "UPDATE fornecedores SET nome='$nome', email='$email', telefone='$telefone'";
             if($imagem) {
                 $sql .= ",imagem='$imagem'";
             }
@@ -96,7 +96,7 @@ function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
             $mensagem = "Fornecedor atualizado com sucesso!";
         } else {
             // Se não há ID, é uma nova inserção
-            $sql = "INSERT INTO fornecedor (nome, email, telefone, imagem) VALUES ('$nome', '$email', '$telefone', '$imagem')";
+            $sql = "INSERT INTO fornecedores (nome, email, telefone, imagem) VALUES ('$nome', '$email', '$telefone', '$imagem')";
             $mensagem = "Fornecedor cadastrado com sucesso!";
         }
 
@@ -116,7 +116,7 @@ if(isset($_GET['delete_id'])) {
     if($check_produtos['count'] > 0){
         $mensagem = "Não é possível excluir este fornecedor pois existem produtos cadastrados para ele.";
     } else {
-        $sql = "DELETE FROM fornecedor WHERE id='$delete_id'";
+        $sql = "DELETE FROM fornecedores WHERE id='$delete_id'";
         if ($conn->query($sql) === TRUE) {
             $mensagem = "Fornecedor excluído com sucesso!";
         } else {
@@ -126,13 +126,13 @@ if(isset($_GET['delete_id'])) {
 }
 
 // Busca todos os fornecedores para listar na tabela
-$fornecedor = $conn->query("SELECT * FROM fornecedor");
+$fornecedores = $conn->query("SELECT * FROM fornecedores");
 
 // Se foi solicitada a edição de um fornecedor, busca os dados dele
 $fornecedor = null;
 if (isset($_GET['edit_id'])) {
     $edit_id = $_GET['edit_id'];
-    $fornecedor = $conn->query("SELECT * FROM fornecedor WHERE id='$edit_id'")->fetch_assoc();
+    $fornecedor = $conn->query("SELECT * FROM fornecedores WHERE id='$edit_id'")->fetch_assoc();
 }
 ?>
 
@@ -183,12 +183,13 @@ if (isset($_GET['edit_id'])) {
                 <th>Imagem</th>
                 <th>Ações</th>
             </tr>
-            <?php while ($row = $fornecedor->fetch_assoc()): ?>
+            <?php while ($row = $fornecedores->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo $row['id']?></td>
                     <td><?php echo $row['nome']?></td>
                     <td><?php echo $row['email']?></td>
                     <td><?php echo $row['telefone']?></td>
+            
                     <td>
                         <?php if ($row['imagem']):?>
                             <img src="<?php echo $row['imagem'];?>" alt="Imagem do fornecedor" class="thumbnail">
@@ -201,7 +202,7 @@ if (isset($_GET['edit_id'])) {
                         <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                     </td>
                 </tr>
-            <?php endwhile; ?>
+                <?php endwhile; ?>
           </table>
           <div class="actions">
             <a href="index.php" class="back-button">Voltar</a>
