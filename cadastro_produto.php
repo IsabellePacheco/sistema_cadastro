@@ -73,7 +73,7 @@ function redimensionarESalvarImagem($arquivo, $largura = 80, $altura = 80) {
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'] ?? '';
-    $fornecedor_id = $_POST['fornecedor_id'];
+    $fornecedores_id = $_POST['fornecedores_id'];
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = str_replace(',', '.', $_POST['preco']); // Converte vírgula para ponto
@@ -136,7 +136,7 @@ if (isset($_GET['delete_id'])) {
 }
 
 // Busca todos os produtos para listar na tabela
-$produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f.nome AS fornecedor_nome FROM produtos p JOIN fornecedor f ON p.fornecedor_id = f.id");
+$produtos = $conn->query("SELECT p.id, p.nome, p.descricao, p.preco, p.imagem, f.nome AS fornecedores_nome FROM produtos p JOIN fornecedores f ON p.fornecedor_id = f.id");
 
 // Se foi solicitada a edição de um produto, busca os dados dele
 $produto = null;
@@ -151,7 +151,7 @@ if (isset($_GET['edit_id'])) {
 }
 
 // Busca todos os fornecedores para o select do formulário
-$fornecedor = $conn->query("SELECT id, nome FROM fornecedor");
+$fornecedores = $conn->query("SELECT id, nome FROM fornecedores");
 ?>
 
 <!DOCTYPE html>
@@ -169,9 +169,9 @@ $fornecedor = $conn->query("SELECT id, nome FROM fornecedor");
         <form method="post" action="" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo $produto['id'] ?? ''; ?>">
             
-            <label for="fornecedor_id">Fornecedor:</label>
-            <select name="fornecedor_id" required>
-                <?php while ($row = $fornecedor->fetch_assoc()): ?>
+            <label for="fornecedores_id">Fornecedor:</label>
+            <select name="fornecedores_id" required>
+                <?php while ($row = $fornecedores->fetch_assoc()): ?>
                     <option value="<?php echo $row['id']; ?>" <?php if ($produto && $produto['fornecedor_id'] == $row['id']) echo 'selected'; ?>><?php echo $row['nome']; ?></option>
                 <?php endwhile; ?>
             </select>
@@ -220,7 +220,7 @@ $fornecedor = $conn->query("SELECT id, nome FROM fornecedor");
                     <td><?php echo $row['nome']; ?></td>
                     <td><?php echo $row['descricao']; ?></td>
                     <td><?php echo 'R$ ' . number_format($row['preco'], 2, ',', '.'); ?></td>
-                    <td><?php echo $row['fornecedor_nome']; ?></td>
+                    <td><?php echo $row['fornecedores_nome']; ?></td>
                     <td>
                         <?php if ($row['imagem']): ?>
                             <img src="<?php echo $row['imagem']; ?>" alt="Imagem do produto" class="thumbnail">
