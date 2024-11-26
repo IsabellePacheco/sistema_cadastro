@@ -11,3 +11,4 @@ header('Location: login.php');
 // Garante que nenhum código adicional seja executado após o redirecionamento.
 exit();
 ?>
+
