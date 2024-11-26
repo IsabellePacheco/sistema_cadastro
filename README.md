@@ -8,6 +8,8 @@
 * Validação
 * Style  
 
+<hr>
+
 * Tela de login
 <img width="395" alt="image" src="https://github.com/user-attachments/assets/9c7ab62b-d2ae-4bff-acd1-8b92785383e5">
 
